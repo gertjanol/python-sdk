@@ -18,7 +18,7 @@ class Response(ResponseBase):
                  *args, **kwargs):
         # we will force a result since we only have the error object
         self.result = kwargs['request'].result
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return self.__dict__.__str__()
@@ -40,11 +40,11 @@ class Request(RequestBase):
     :param dict products: products
     :param str tracktrace: tracktrace code
     """
-    def __init__(self, transaction_id: str=None, products: dict={}, tracktrace: str=None):
+    def __init__(self, transaction_id=None, products={}, tracktrace=None):
         self.transaction_id = transaction_id
         self.products = products
         self.tracktrace = tracktrace
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -88,7 +88,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -98,11 +98,11 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 
-    def add_product(self, product_id: str, quantity: int):
+    def add_product(self, product_id, quantity):
         if product_id in self.products:
             self.products[product_id] += quantity
         else:

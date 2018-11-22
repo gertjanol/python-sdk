@@ -20,10 +20,10 @@ class APIAuthentication(object):
     :cvar bool use_http_auth: whether we use basic HTTP authentication or not.
                                You should never really change this: Basic HTTP auth should be used by default!
     """
-    api_token: str = None
-    service_id: str = None
-    token_code: str = None
-    use_http_auth: bool = True
+    api_token = None
+    service_id = None
+    token_code = None
+    use_http_auth = True
 
 
 class APIClient(object):
@@ -36,7 +36,7 @@ class APIClient(object):
         self.api_token = None
         self.service_id = None
 
-    def get_auth(self, as_string: bool=True):
+    def get_auth(self, as_string=True):
         """
         Get Basic HTTP auth string to use in header
         :param as_string: whether to return as string. If False, returns bytes
@@ -60,8 +60,8 @@ class APIClient(object):
         return "PAYNL/SDK/{0} Python/{1} ({2})".format(self.client_version, version, sys.hexversion)
 
     def perform_request(self,
-                        request: RequestBase,
-                        method: str='POST'
+                        request,
+                        method='POST'
                         ):
         """
         Performs the actual call to the API and fill the responses.

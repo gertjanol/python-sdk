@@ -20,18 +20,18 @@ class Response(ResponseBase):
     :param str refund_id: Refund ID. Please note this is NOT guaranteed. Value is only returned for IBAN based payments
     """
     def __init__(self,
-                 refunded_transactions: dict={},
-                 failed_transactions: dict={},
-                 amount_refunded: int=None,
-                 description: str=None,
-                 refund_id: str=None,
+                 refunded_transactions={},
+                 failed_transactions={},
+                 amount_refunded=None,
+                 description=None,
+                 refund_id=None,
                  *args, **kwargs):
         self.refunded_transactions = refunded_transactions
         self.failed_transactions = failed_transactions
         self.amount_refunded = amount_refunded
         self.description = description
         self.refund_id = refund_id
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return str(self.__dict__)
@@ -105,16 +105,16 @@ class Request(RequestBase):
     :param str process_date: process date
     """
     def __init__(self,
-                 transaction_id: str=None,
-                 amount: int=None,
-                 description: str=None,
-                 process_date: str=None,
+                 transaction_id=None,
+                 amount=None,
+                 description=None,
+                 process_date=None,
                  ):
         self.transaction_id = transaction_id
         self.amount = amount
         self.description = description
         self.process_date = process_date
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -166,7 +166,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -176,11 +176,11 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 
-    def add_product(self, product_id: str, quantity: int):
+    def add_product(self, product_id, quantity):
         if product_id in self.products:
             self.products[product_id] += quantity
         else:

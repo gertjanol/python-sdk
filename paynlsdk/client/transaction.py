@@ -3,12 +3,10 @@ from datetime import datetime
 from paynlsdk.api.client import APIClient
 from paynlsdk.objects import TransactionData, TransactionStartStatsData, SalesData, TransactionEndUser, BankDetails
 
-from typing import List
-
 
 class Transaction(object):
     @staticmethod
-    def approve(order_id: str, entrance_code: str=None):
+    def approve(order_id, entrance_code=None):
         """
         Approve a transaction
 
@@ -23,7 +21,7 @@ class Transaction(object):
         return response.result
 
     @staticmethod
-    def decline(order_id: str, entrance_code: str=None):
+    def decline(order_id, entrance_code=None):
         """
         Decline a transaction
 
@@ -38,7 +36,7 @@ class Transaction(object):
         return response.result
 
     @staticmethod
-    def capture(transaction_id: str, products: dict={}, tracktrace: str=None):
+    def capture(transaction_id, products={}, tracktrace=None):
         """
         Capture a transaction
 
@@ -56,7 +54,7 @@ class Transaction(object):
         return response.result
 
     @staticmethod
-    def void(transaction_id: str):
+    def void(transaction_id):
         """
         Decline a transaction
 
@@ -69,7 +67,7 @@ class Transaction(object):
         return response.result
 
     @staticmethod
-    def get_banks() -> List[BankDetails]:
+    def get_banks():
         """
         Gets the list of banks.
 
@@ -83,7 +81,7 @@ class Transaction(object):
         return request.response.banks
 
     @staticmethod
-    def get_service(payment_method_id: int):
+    def get_service(payment_method_id):
         """
         Get a transaction getservice :class:`paynlsdk.api.transaction.getservice.Response` instance
 
@@ -95,7 +93,7 @@ class Transaction(object):
         return Transaction.get_service_response(payment_method_id)
 
     @staticmethod
-    def get_service_payment_options(payment_method_id: int=None):
+    def get_service_payment_options(payment_method_id=None):
         """
         Get a transaction getservicepaymentoptions :class:`paynlsdk.api.transaction.getservicepaymentoptions.Response` instance
 
@@ -109,7 +107,7 @@ class Transaction(object):
         return Transaction.get_service_payment_options_response(payment_method_id)
 
     @staticmethod
-    def info(transaction_id: str, entrance_code: str=None):
+    def info(transaction_id, entrance_code=None):
         """
         Get a transaction info :class:`paynlsdk.api.transaction.info.Response` instance
 
@@ -125,7 +123,7 @@ class Transaction(object):
         return Transaction.info_response(transaction_id, entrance_code)
 
     @staticmethod
-    def status(transaction_id: str):
+    def status(transaction_id):
         """
         Get transaction status
 
@@ -139,7 +137,7 @@ class Transaction(object):
         return Transaction.status_response(transaction_id)
 
     @staticmethod
-    def refund(transaction_id: str, amount: int=None, description: str=None, process_date: datetime=None):
+    def refund(transaction_id, amount=None, description=None, process_date=None):
         """
         Refund (part of) a transaction
 
@@ -158,18 +156,18 @@ class Transaction(object):
         return Transaction.refund_response(transaction_id, amount, description, process_date)
 
     @staticmethod
-    def start(amount: str,
-              ip_address: str,
-              finish_url: str,
-              payment_option_id: int=None,
-              payment_option_sub_id: int=None,
-              transaction: TransactionData=None,
-              stats_data: TransactionStartStatsData=None,
-              end_user: TransactionEndUser=None,
-              sale_data: SalesData=None,
-              test_mode: bool=False,
-              transfer_type: str=None,
-              transfer_value: str=None
+    def start(amount,
+              ip_address,
+              finish_url,
+              payment_option_id=None,
+              payment_option_sub_id=None,
+              transaction=None,
+              stats_data=None,
+              end_user=None,
+              sale_data=None,
+              test_mode=False,
+              transfer_type=None,
+              transfer_value=None
               ):
         """
         Get a transaction start :class:`paynlsdk.api.transaction.start.Response` instance
@@ -318,7 +316,7 @@ class Transaction(object):
         return Request()
 
     @staticmethod
-    def approve_response(order_id: str, entrance_code: str=None):
+    def approve_response(order_id, entrance_code=None):
         """
         Get a transaction approve :class:`paynlsdk.api.transaction.approve.Response` instance
 
@@ -338,7 +336,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def decline_response(order_id: str, entrance_code: str=None):
+    def decline_response(order_id, entrance_code=None):
         """
         Get a transaction decline :class:`paynlsdk.api.transaction.decline.Response` instance
 
@@ -358,7 +356,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def capture_response(transaction_id: str, products: dict={}, tracktrace: str=None):
+    def capture_response(transaction_id, products={}, tracktrace=None):
         """
         Get a transaction void :class:`paynlsdk.api.transaction.capture.Response` instance
 
@@ -381,7 +379,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def void_response(transaction_id: str):
+    def void_response(transaction_id):
         """
         Get a transaction void :class:`paynlsdk.api.transaction.voidauthorization.Response` instance
 
@@ -415,7 +413,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def get_service_response(payment_method_id: int):
+    def get_service_response(payment_method_id):
         """
         Get a transaction getservice :class:`paynlsdk.api.transaction.getservice.Response` instance
 
@@ -431,7 +429,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def get_service_payment_options_response(payment_method_id: int=None):
+    def get_service_payment_options_response(payment_method_id=None):
         """
         Get a transaction getservicepaymentoptions :class:`paynlsdk.api.transaction.getservicepaymentoptions.Response` instance
 
@@ -449,7 +447,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def info_response(transaction_id: str, entrance_code: str=None):
+    def info_response(transaction_id, entrance_code=None):
         """
         Get a transaction info :class:`paynlsdk.api.transaction.info.Response` instance
 
@@ -469,7 +467,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def status_response(transaction_id: str):
+    def status_response(transaction_id):
         """
         Get a transaction status :class:`paynlsdk.api.transaction.status.Response` instance
 
@@ -487,7 +485,7 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def refund_response(transaction_id: str, amount: int=None, description: str=None, process_date: datetime=None):
+    def refund_response(transaction_id, amount=None, description=None, process_date=None):
         """
         Get a transaction refund :class:`paynlsdk.api.transaction.refund.Response` instance
 
@@ -512,18 +510,18 @@ class Transaction(object):
         return request.response
 
     @staticmethod
-    def start_response(amount: str,
-              ip_address: str,
-              finish_url: str,
-              payment_option_id: int=None,
-              payment_option_sub_id: int=None,
-              transaction: TransactionData=None,
-              stats_data: TransactionStartStatsData=None,
-              end_user: TransactionEndUser=None,
-              sale_data: SalesData=None,
-              test_mode: bool=False,
-              transfer_type: str=None,
-              transfer_value: str=None
+    def start_response(amount,
+              ip_address,
+              finish_url,
+              payment_option_id=None,
+              payment_option_sub_id=None,
+              transaction=None,
+              stats_data=None,
+              end_user=None,
+              sale_data=None,
+              test_mode=False,
+              transfer_type=None,
+              transfer_value=None
               ):
         """
         Get a transaction start :class:`paynlsdk.api.transaction.start.Response` instance

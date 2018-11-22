@@ -1,10 +1,9 @@
-from typing import List
 from paynlsdk.objects import BankDetails
 
 
 class Banks(object):
     @staticmethod
-    def get_list() -> List[BankDetails]:
+    def get_list():
         """
         Gets the list of banks.
 

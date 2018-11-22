@@ -1,12 +1,22 @@
-from urllib.parse import urlencode
-from abc import ABC, abstractmethod
+from six import with_metaclass
+
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    from urllib import urlencode
+
+try:
+    from abc import ABC, abstractmethod
+except ImportError:
+    from abc import ABCMeta as ABC, abstractmethod
 
 from paynlsdk.api.responsebase import ResponseBase
 from paynlsdk.exceptions import SchemaException
 from paynlsdk.validators import ParamValidator
 
 
-class RequestBase(ABC):
+class RequestBase(with_metaclass(ABC, object)):
+
     def __init__(self):
         self._api_token = None
         self._service_id = None
@@ -18,7 +28,7 @@ class RequestBase(ABC):
         return self._api_token
 
     @api_token.setter
-    def api_token(self, api_token: str):
+    def api_token(self, api_token):
         self._api_token = api_token
 
     @property
@@ -26,7 +36,7 @@ class RequestBase(ABC):
         return self._service_id
 
     @service_id.setter
-    def service_id(self, service_id: str):
+    def service_id(self, service_id):
         self._service_id = service_id
 
     @property
@@ -35,7 +45,7 @@ class RequestBase(ABC):
 
     @property
     @abstractmethod
-    def response(self) -> ResponseBase:
+    def response(self):
         pass
 
     @abstractmethod

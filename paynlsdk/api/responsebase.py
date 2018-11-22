@@ -9,7 +9,7 @@ class ResponseBase(object):
         If the call itself failed, this will also contain an error id and message
     """
 
-    def __init__(self, request: Error=None, *args, **kwargs):
+    def __init__(self, request=None, *args, **kwargs):
         self.request = request
         return
 

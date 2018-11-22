@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List, Dict
 
 from marshmallow import Schema, fields, post_load, pre_load
 from paynlsdk.validators import ParamValidator
@@ -10,7 +9,7 @@ class Error(object):
     This class represents the result of a call to the API.
     It does not necessarily represent a failed call because this implies the result of the call itself
     """
-    def __init__(self, result: bool=None, code: str=None, message: str=None):
+    def __init__(self, result=None, code=None, message=None):
         """
 
         :param result: outcome of the result. This indicates whether we have a failed or successful result
@@ -44,9 +43,9 @@ class Address(object):
     """
     Address details structure
     """
-    def __init__(self, initials: str=None, last_name: str=None, gender: str=None, street_name: str=None,
-                 street_number: str = None, street_number_extension: str=None, zip_code: str=None, city: str=None,
-                 region_code: str=None, country_code: str=None, country_name: str=None):
+    def __init__(self, initials=None, last_name=None, gender=None, street_name=None,
+                 street_number = None, street_number_extension=None, zip_code=None, city=None,
+                 region_code=None, country_code=None, country_name=None):
         """
         Create address instance
 
@@ -127,7 +126,7 @@ class Company(object):
     """
     Company details structure
     """
-    def __init__(self, name: str=None, coc_number: str=None, vat_number: str=None, country_code: str=None):
+    def __init__(self, name=None, coc_number=None, vat_number=None, country_code=None):
         """
         Create company details instance
 
@@ -160,7 +159,7 @@ class Merchant(object):
     """
     Merchant details structure
     """
-    def __init__(self, id: str=None, name: str=None, public_name: str=None, state: int=None):
+    def __init__(self, id=None, name=None, public_name=None, state=None):
         """
         Create instance of Merchant details
 
@@ -197,7 +196,7 @@ class PaymentMethod(object):
     """
     Payment method details structure
     """
-    def __init__(self, id: int=None, name: str=None, abbreviation: str=None):
+    def __init__(self, id=None, name=None, abbreviation=None):
         """
         Create instance of payment method details
 
@@ -230,7 +229,7 @@ class ServiceCategory(object):
     """
     Service category details structure
     """
-    def __init__(self, id: str=None, name: str=None):
+    def __init__(self, id=None, name=None):
         """
         Create service category instance
 
@@ -321,7 +320,7 @@ class SalesData(object):
     """
     Sales data details structure
     """
-    def __init__(self, invoice_date: datetime=None, delivery_date: datetime=None, order_data: List[OrderData]=[]):
+    def __init__(self, invoice_date=None, delivery_date=None, order_data=[]):
         """
         Create instance of SalesData details
 
@@ -337,7 +336,7 @@ class SalesData(object):
         """
         self.invoice_date = invoice_date
         self.delivery_date = delivery_date
-        self.order_data: List[OrderData] = order_data  # TODO: is a LIST
+        self.order_data = order_data  # TODO: is a LIST
 
     def __repr__(self):
         return str(self.__dict__)
@@ -369,7 +368,7 @@ class Service(object):
     Service details structure
     """
     def __init__(self, id=None, name=None, description=None, publication=None, base_path=None,
-                 module=None, sub_module=None, state=None, success_url=None, error_url=None, secret: str=None):
+                 module=None, sub_module=None, state=None, success_url=None, error_url=None, secret=None):
         """
         Create Service details instance
 
@@ -445,8 +444,8 @@ class PaymentProfile(object):
     """
     Payment profile details structure
     """
-    def __init__(self, id: int=None, name: str=None, parent_id: int=None, public: bool=False,
-                 payment_method_id: int=None, country_id: int=None, payment_tariff_id: int=None, noa_id: int=None):
+    def __init__(self, id=None, name=None, parent_id=None, public=False,
+                 payment_method_id=None, country_id=None, payment_tariff_id=None, noa_id=None):
         """
         Create instance of payment profile details
 
@@ -499,7 +498,7 @@ class CountryId(object):
     """
     Country details structure
     """
-    def __init__(self, id: str=None, name: str=None):
+    def __init__(self, id=None, name=None):
         """
         Create country detail structure
 
@@ -508,8 +507,8 @@ class CountryId(object):
         :param name: Country name
         :type name: str
         """
-        self.id: str = id
-        self.name: str = name
+        self.id = id
+        self.name = name
 
     def __repr__(self):
         return str(self.__dict__)
@@ -538,8 +537,8 @@ class ServicePaymentProfile(object):
         :class:`paynlsdk.client.paymentmethods.get_list` for usage
 
     """
-    def __init__(self, id: int=None, name: str=None, visible_name: str=None,
-                 costs_fixed: int=0, costs_percentage: float=0, countries: List[CountryId]=None):
+    def __init__(self, id=None, name=None, visible_name=None,
+                 costs_fixed=0, costs_percentage=0, countries=None):
         """
         Create payment profile details
 
@@ -568,9 +567,9 @@ class ServicePaymentProfile(object):
         self.id = id
         self.name = name
         self.visible_name = visible_name
-        self.costs_fixed: int = costs_fixed
-        self.costs_percentage: float = costs_percentage
-        self.countries: List[CountryId] = countries
+        self.costs_fixed = costs_fixed
+        self.costs_percentage = costs_percentage
+        self.countries = countries
 
     def __repr__(self):
         return str(self.__dict__)
@@ -605,9 +604,9 @@ class RefundInfo(object):
     """
     Refund info details structure
     """
-    def __init__(self, payment_session_id: int=None, amount: int=None, description: str=None,
-                 bank_account_holder: str=None, bank_account_number: str=None, bank_account_bic: str=None,
-                 status_code: int=None, status_name: str=None, process_date: datetime=None):
+    def __init__(self, payment_session_id=None, amount=None, description=None,
+                 bank_account_holder=None, bank_account_number=None, bank_account_bic=None,
+                 status_code=None, status_name=None, process_date=None):
         self.payment_session_id = payment_session_id
         self.amount = amount
         self.description = description
@@ -642,8 +641,8 @@ class TransactionStartInfo(object):
     """
     Transaction start info details structure
     """
-    def __init__(self, transaction_id: str=None, payment_url: str=None,
-                 popup_allowed: bool=False, payment_reference: str=None):
+    def __init__(self, transaction_id=None, payment_url=None,
+                 popup_allowed=False, payment_reference=None):
         """
         Transaction start result sructure
 
@@ -759,7 +758,7 @@ class TransactionStartEnduser(object):
     .. seealso::
         :class:`paynlsdk.api.transaction.start.Response` for usage details
     """
-    def __init__(self, blacklist: int=None):
+    def __init__(self, blacklist=None):
         """
         Create transaction start user response structure
 
@@ -789,7 +788,7 @@ class TransactionData(object):
     """
     Transaction data structure
     """
-    def __init__(self, currency=None, costs_vat=None, order_exchange_url=None, description=None, expire_date: datetime=None,
+    def __init__(self, currency=None, costs_vat=None, order_exchange_url=None, description=None, expire_date=None,
                  order_number=None):
         """
         Transaction data structure
@@ -982,8 +981,8 @@ class TransactionStartStatsData(object):
     .. seealso::
         :class:`paynlsdk.api.transaction.start.Request` for usage example
     """
-    def __init__(self, promotor_id: int=None, info: str=None, tool: str=None,
-                 extra1: str=None, extra2: str=None, extra3: str=None, domain_id=None):
+    def __init__(self, promotor_id=None, info=None, tool=None,
+                 extra1=None, extra2=None, extra3=None, domain_id=None):
         """
         Create stats details instance
 
@@ -1021,8 +1020,8 @@ class StatsDetails(object):
     """
     STats details data structure
     """
-    def __init__(self, payment_session_id: int=None, tool: str=None, info: str=None, promotor_id: int=None,
-                 extra1: str=None, extra2: str=None, extra3: str=None, object: str=None):
+    def __init__(self, payment_session_id=None, tool=None, info=None, promotor_id=None,
+                 extra1=None, extra2=None, extra3=None, object=None):
         """
         Create stats details instance
 
@@ -1193,27 +1192,27 @@ class EndUserBase(object):
     """
     End User base details structure
     """
-    def __init__(self, customer_reference: str=None, language: str=None, initials: str=None, gender: str=None,
-                 last_name: str=None, dob: datetime=None,
-                 phone_number: str=None, email_address: str=None, bank_account: str=None, iban: str=None, bic: str=None,
-                 send_confirm_email: bool=None,
-                 address: Address=None, invoice_address: Address=None, company: Company=None
+    def __init__(self, customer_reference=None, language=None, initials=None, gender=None,
+                 last_name=None, dob=None,
+                 phone_number=None, email_address=None, bank_account=None, iban=None, bic=None,
+                 send_confirm_email=None,
+                 address=None, invoice_address=None, company=None
                  ):
         self.customer_reference = customer_reference
         self.language = language
         self.initials = initials
         self.gender = gender  #optional, Enum
         self.last_name = last_name
-        self.dob: datetime = dob
+        self.dob = dob
         self.phone_number = phone_number
         self.email_address = email_address
         self.bank_account = bank_account
         self.iban = iban
         self.bic = bic
         self.send_confirm_email = send_confirm_email
-        self.company: Company = company
-        self.address: Address = address
-        self.invoice_address: Address = invoice_address
+        self.company = company
+        self.address = address
+        self.invoice_address = invoice_address
 
     def __repr__(self):
         return str(self.__dict__)
@@ -1223,8 +1222,8 @@ class EndUser(EndUserBase):
     """
     End User details structure
     """
-    def __init__(self, payment_details: PaymentDetails=None, storno_details: StornoDetails=None,
-                 stats_details: StatsDetails=None,
+    def __init__(self, payment_details=None, storno_details=None,
+                 stats_details=None,
                  *args, **kwargs):
         """
         Create EndUser details
@@ -1249,10 +1248,10 @@ class EndUser(EndUserBase):
         :param kwargs: Any keyword arguments the :class:`paynlsdk.objects.EndUserBase` receives
         :type kwargs: dict
         """
-        self.payment_details: PaymentDetails = payment_details
-        self.storno_details: StornoDetails = storno_details
-        self.stats_details: StatsDetails = stats_details
-        super().__init__(**kwargs)
+        self.payment_details = payment_details
+        self.storno_details = storno_details
+        self.stats_details = stats_details
+        super(EndUser, self).__init__(**kwargs)
 
     def __repr__(self):
         return str(self.__dict__)
@@ -1297,7 +1296,7 @@ class TransactionEndUser(EndUserBase):
     Transaction End User details structure
     """
     def __init__(self,
-                 access_code: str=None, customer_trust: int=None,
+                 access_code=None, customer_trust=None,
                  *args, **kwargs):
         """
         Create TransactionEndUser details
@@ -1314,7 +1313,7 @@ class TransactionEndUser(EndUserBase):
         :param kwargs: Any keyword arguments the :class:`paynlsdk.objects.EndUserBase` receives
         :type kwargs: dict
         """
-        super().__init__(**kwargs)
+        super(TransactionEndUser, self).__init__(**kwargs)
         self.access_code = access_code
         self.customer_trust = customer_trust
 
@@ -1358,25 +1357,25 @@ class TransactionStatusDetails(object):
     Transaction status details structure
     """
     def __init__(self,
-                 transaction_id: str=None,
-                 order_id: str=None,
-                 payment_profile_id: str=None,
-                 state: int=None,
-                 state_name: str=None,
-                 currency: str=None,
-                 amount: int=None,
-                 currency_amount: int=None,
-                 paid_amount: int=None,
-                 paid_currency_amount: int=None,
-                 refund_amount: int=None,
-                 refund_currency_amount: int=None,
-                 created: str=None,
-                 identifier_name: str=None,
-                 identifier_public: str=None,
-                 identifier_hash: str=None,
-                 start_ip_address: str=None,
-                 completed_ip_address: str=None,
-                 order_number: str=None,
+                 transaction_id=None,
+                 order_id=None,
+                 payment_profile_id=None,
+                 state=None,
+                 state_name=None,
+                 currency=None,
+                 amount=None,
+                 currency_amount=None,
+                 paid_amount=None,
+                 paid_currency_amount=None,
+                 refund_amount=None,
+                 refund_currency_amount=None,
+                 created=None,
+                 identifier_name=None,
+                 identifier_public=None,
+                 identifier_hash=None,
+                 start_ip_address=None,
+                 completed_ip_address=None,
+                 order_number=None,
                  ):
         self.transaction_id = transaction_id
         self.order_id = order_id
@@ -1433,12 +1432,12 @@ class RefundSuccessInfo(object):
     Refund success details structure
     """
     def __init__(self,
-                 order_id: str=None,
-                 amount: int=None,
-                 amount_refunded: int=None,
-                 voucher_number: str=None,
-                 bankaccount_number: str=None,
-                 refund_id: str=None,
+                 order_id=None,
+                 amount=None,
+                 amount_refunded=None,
+                 voucher_number=None,
+                 bankaccount_number=None,
+                 refund_id=None,
                  ):
         """
         Create Refund success information structure
@@ -1485,12 +1484,12 @@ class RefundFailInfo(object):
     Refund fail details structure
     """
     def __init__(self,
-                 order_id: str=None,
-                 amount: int=None,
-                 refund_amount: int=None,
-                 voucher_number: str=None,
-                 bankaccount_number: str=None,
-                 reason: str=None,
+                 order_id=None,
+                 amount=None,
+                 refund_amount=None,
+                 voucher_number=None,
+                 bankaccount_number=None,
+                 reason=None,
                  ):
         """
         Create Refund failure information structure
@@ -1537,11 +1536,11 @@ class BankDetails(object):
     Bank details structure
     """
     def __init__(self,
-                 id: int=None,
-                 name: str=None,
-                 issuer_id: str=None,
-                 icon: str=None,
-                 available: bool=False
+                 id=None,
+                 name=None,
+                 issuer_id=None,
+                 icon=None,
+                 available=False
                  ):
         """
         Create bank details instance
@@ -1583,8 +1582,8 @@ class PaymentOptionBase(object):
     """
     Payment option base details structure
     """
-    def __init__(self, id: int=None, name: str=None, visible_name: str=None,
-                 img: str=None, path: str=None, state: int=None):
+    def __init__(self, id=None, name=None, visible_name=None,
+                 img=None, path=None, state=None):
         """
         Create Payment option details instance
 
@@ -1631,7 +1630,7 @@ class PaymentSubOption(PaymentOptionBase):
         :param kwargs: Any keyword arguments the :class:`paynlsdk.objects.PaymentOptionBase` receives
         :type kwargs: dict
         """
-        super().__init__(**kwargs)
+        super(PaymentSubOption, self).__init__(**kwargs)
 
     def __repr__(self):
         return str(self.__dict__)
@@ -1654,8 +1653,8 @@ class PaymentOption(PaymentOptionBase):
     """
     Payment option details structure
     """
-    def __init__(self, payment_method_id: int=None, use_only_in_store: bool=False,
-                 payment_sub_options: Dict[int, PaymentSubOption]={}, *args, **kwargs):
+    def __init__(self, payment_method_id=None, use_only_in_store=False,
+                 payment_sub_options={}, *args, **kwargs):
         """
         Create Payment option details instance
 
@@ -1677,8 +1676,8 @@ class PaymentOption(PaymentOptionBase):
         """
         self.payment_method_id = payment_method_id
         self.use_only_in_store = use_only_in_store
-        self.payment_sub_options: Dict[int, PaymentSubOption] = payment_sub_options
-        super().__init__(**kwargs)
+        self.payment_sub_options = payment_sub_options
+        super(PaymentOption, self).__init__(**kwargs)
 
     def __repr__(self):
         return str(self.__dict__)
@@ -1725,8 +1724,8 @@ class CountryOption(object):
     """
     Country option details structure
     """
-    def __init__(self, id: int=None, name: str=None, visible_name: str=None, in_eu: bool=False,
-                 img: str=None, path: str=None, payment_option_list: Dict[int, PaymentOption]={}):
+    def __init__(self, id=None, name=None, visible_name=None, in_eu=False,
+                 img=None, path=None, payment_option_list={}):
         """
         Create country option instance
 
@@ -1754,7 +1753,7 @@ class CountryOption(object):
         self.in_eu = in_eu
         self.img = img
         self.path = path
-        self.payment_option_list: Dict[int, PaymentOption] = payment_option_list
+        self.payment_option_list = payment_option_list
 
     def __repr__(self):
         return str(self.__dict__)

@@ -13,7 +13,7 @@ class SchemaException(Exception):
         super(SchemaException, self).__init__(message)
 
     @classmethod
-    def _key(self, k: str, prefix: str=''):
+    def _key(self, k, prefix=''):
         """
         Format a prefix/key combination
         :param k: current key
@@ -29,7 +29,7 @@ class SchemaException(Exception):
             return prefix + '.' + k
 
     @classmethod
-    def _convert_errors(self, errors, depth: int = 0, prefix: str = ''):
+    def _convert_errors(self, errors, depth=0, prefix=''):
         """
         Convert an error object into a readable format.
 

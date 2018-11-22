@@ -16,17 +16,17 @@ class Response(ResponseBase):
     :param RefundInfo refund: Refund information
     """
     def __init__(self,
-                 refund_id: str=None,
-                 refund: RefundInfo=None,
+                 refund_id=None,
+                 refund=None,
                  *args, **kwargs):
         self.refundid = refund_id
         self.refund = refund
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return str(self.__dict__)
 
-    def is_refunded(self) -> bool:
+    def is_refunded(self):
         """
         Check if refund is processed
         :return: indication whether the refund has been processed or not
@@ -51,9 +51,9 @@ class Request(RequestBase):
 
     :param str refund_id: Refund ID
     """
-    def __init__(self, refund_id: str=None):
+    def __init__(self, refund_id=None):
         self.refund_id = refund_id
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -93,7 +93,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -103,7 +103,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

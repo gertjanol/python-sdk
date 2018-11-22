@@ -8,7 +8,6 @@ from paynlsdk.objects import ErrorSchema, Merchant, MerchantSchema, Service, Ser
     PaymentOption, PaymentOptionSchema, CountryOption, CountryOptionSchema,\
     ServicePaymentProfile, ServicePaymentProfileSchema
 from paynlsdk.validators import ParamValidator
-from typing import Dict
 
 
 class Response(ResponseBase):
@@ -22,20 +21,20 @@ class Response(ResponseBase):
     :param payment_profiles Dict[str, ServicePaymentProfile]: payment profile info
     """
     def __init__(self,
-                 merchant: Merchant=None,
-                 service: Service=None,
-                 settings: dict=None,
-                 # payment_options: dict=None,
-                 country_options: Dict[str, CountryOption]=None,
-                 payment_profiles: Dict[int, ServicePaymentProfile]=None,
+                 merchant=None,
+                 service=None,
+                 settings=None,
+                 # payment_options=None,
+                 country_options=None,
+                 payment_profiles=None,
                  *args, **kwargs):
         self.merchant = merchant
         self.service = service
         self.settings = settings
         # self.payment_options = payment_options
-        self.country_options: Dict[str, CountryOption] = country_options
-        self.payment_profiles: Dict[int, ServicePaymentProfile] = payment_profiles
-        super().__init__(**kwargs)
+        self.country_options = country_options
+        self.payment_profiles = payment_profiles
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return self.__dict__.__str__()
@@ -112,9 +111,9 @@ class Request(RequestBase):
 
     :param str payment_method_id: Payment method ID
     """
-    def __init__(self, payment_method_id: int=None):
+    def __init__(self, payment_method_id=None):
         self.payment_method_id = payment_method_id
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -153,7 +152,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -163,7 +162,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

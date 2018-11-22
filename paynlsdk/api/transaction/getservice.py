@@ -1,5 +1,4 @@
 import json
-from typing import Dict
 
 from marshmallow import Schema, fields, post_load, pre_load
 
@@ -20,16 +19,16 @@ class Response(ResponseBase):
     :param country_options Dict[str, CountryOption]: country options
     """
     def __init__(self,
-                 merchant: Merchant = None,
-                 service: Service = None,
-                 settings: dict={},
-                 country_options: Dict[str, CountryOption]={},
+                 merchant=None,
+                 service=None,
+                 settings={},
+                 country_options={},
                  *args, **kwargs):
-        self.merchant: Merchant = merchant
-        self.service: Service = service
-        self.settings: dict = settings
-        self.country_options: Dict[str, CountryOption] = country_options
-        super().__init__(**kwargs)
+        self.merchant=merchant
+        self.service=service
+        self.settings = settings
+        self.country_options[str, CountryOption] = country_options
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return self.__dict__.__str__()
@@ -75,9 +74,9 @@ class Request(RequestBase):
 
     :param str payment_method_id: Payment method ID
     """
-    def __init__(self, payment_method_id: int=None):
+    def __init__(self, payment_method_id=None):
         self.payment_method_id = payment_method_id
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -116,7 +115,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -126,7 +125,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         self._response = response
 
     def __repr__(self):

@@ -17,12 +17,12 @@ class Response(ResponseBase):
     :param TransactionStartInfo transaction: transaction details
     """
     def __init__(self,
-                 end_user: TransactionStartEnduser=None,
-                 transaction: TransactionStartInfo=None,
+                 end_user=None,
+                 transaction=None,
                  *args, **kwargs):
-        self.end_user: TransactionStartEnduser = end_user
-        self.transaction: TransactionStartInfo = transaction
-        super().__init__(**kwargs)
+        self.end_user = end_user
+        self.transaction = transaction
+        super(Response, self).__init__(**kwargs)
 
     def get_redirect_url(self):
         return self.transaction.payment_url
@@ -72,32 +72,32 @@ class Request(RequestBase):
     :param str transfer_value: transfer_value. MerchantId (M-xxxx-xxxx) or orderId
     """
     def __init__(self,
-                 amount: int=None,
-                 ip_address: str=None,
-                 finish_url: str=None,
-                 payment_option_id: int=None,
-                 payment_option_sub_id: int=None,
-                 transaction: TransactionData=None,
-                 stats_data: TransactionStartStatsData=None,
-                 end_user: TransactionEndUser=None,
-                 sale_data: SalesData=None,
-                 test_mode: bool=False,
-                 transfer_type: str=None,
-                 transfer_value: str=None,
+                 amount=None,
+                 ip_address=None,
+                 finish_url=None,
+                 payment_option_id=None,
+                 payment_option_sub_id=None,
+                 transaction=None,
+                 stats_data=None,
+                 end_user=None,
+                 sale_data=None,
+                 test_mode=False,
+                 transfer_type=None,
+                 transfer_value=None,
                  ):
         self.amount = amount
         self.ip_address = ip_address
         self.finish_url = finish_url
         self.payment_option_id = payment_option_id
         self.payment_option_sub_id = payment_option_sub_id
-        self.transaction: TransactionData = transaction
-        self.stats_data: TransactionStartStatsData = stats_data
-        self.end_user: TransactionEndUser = end_user
-        self.sale_data: SalesData = sale_data
+        self.transaction = transaction
+        self.stats_data = stats_data
+        self.end_user = end_user
+        self.sale_data = sale_data
         self.test_mode = test_mode
         self.transfer_type = transfer_type
         self.transfer_value = transfer_value
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -298,7 +298,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -308,7 +308,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

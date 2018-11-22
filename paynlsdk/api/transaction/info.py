@@ -23,22 +23,22 @@ class Response(ResponseBase):
     :param str transaction_id: transaction ID
     """
     def __init__(self,
-                 connection: Connection=None,
-                 enduser: EndUser=None,
-                 sale_data: SalesData=None,
-                 payment_details: PaymentDetails=None,
-                 storno_details: StornoDetails=None,
-                 stats_details: StatsDetails=None,
-                 transaction_id: str=None,
+                 connection=None,
+                 enduser=None,
+                 sale_data=None,
+                 payment_details=None,
+                 storno_details=None,
+                 stats_details=None,
+                 transaction_id=None,
                  *args, **kwargs):
-        self.connection: Connection = connection
-        self.enduser: EndUser = enduser
-        self.sale_data: SalesData = sale_data
-        self.payment_details: PaymentDetails = payment_details
-        self.storno_details: StornoDetails = storno_details
-        self.stats_details: StatsDetails = stats_details
+        self.connection = connection
+        self.enduser = enduser
+        self.sale_data = sale_data
+        self.payment_details = payment_details
+        self.storno_details = storno_details
+        self.stats_details = stats_details
         self.transaction_id = transaction_id
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def get_status(self):
         """
@@ -53,7 +53,7 @@ class Response(ResponseBase):
         client.perform_request(request)
         return request.response
 
-    def is_paid(self) -> bool:
+    def is_paid(self):
         """
         Check if the transaction has been PAID
         :return: True of transaction is PAID, False otherwise
@@ -61,7 +61,7 @@ class Response(ResponseBase):
         """
         return self.payment_details.state_name == 'PAID'
 
-    def is_pending(self) -> bool:
+    def is_pending(self):
         """
         Check if the transaction is in PENDING state
         :return: True of transaction is PENDING, False otherwise
@@ -69,7 +69,7 @@ class Response(ResponseBase):
         """
         return self.payment_details.state_name == 'PENDING' or self.payment_details.state_name == 'VERIFY'
 
-    def is_cancelled(self) -> bool:
+    def is_cancelled(self):
         """
         Check if the transaction has been CANCELLED
         :return: True of transaction is CANCELLED, False otherwise
@@ -77,7 +77,7 @@ class Response(ResponseBase):
         """
         return self.payment_details.state <= 0
 
-    def is_authorized(self) -> bool:
+    def is_authorized(self):
         """
         Check if the transaction has been AUTHORIZED
         :return: True of transaction is AUTHORIZED, False otherwise
@@ -85,7 +85,7 @@ class Response(ResponseBase):
         """
         return self.payment_details.state == 95
 
-    def is_being_verified(self) -> bool:
+    def is_being_verified(self):
         """
         Check if the transaction has been VERIFIED
         :return: True of transaction is VERIFIED, False otherwise
@@ -93,7 +93,7 @@ class Response(ResponseBase):
         """
         return self.payment_details.state_name == 'VERIFY'
 
-    def is_refunded(self, allow_partial_refunds: bool = True) -> bool:
+    def is_refunded(self, allow_partial_refunds=True):
         """
         Check if the transaction has been (partially) REFUNDED
 
@@ -109,7 +109,7 @@ class Response(ResponseBase):
         else:
             return False
 
-    def is_partially_refunded(self) -> bool:
+    def is_partially_refunded(self):
         """
         Check if the transaction has been partially REFUNDED
 
@@ -118,7 +118,7 @@ class Response(ResponseBase):
         """
         return self.payment_details.state_name == 'PARTIAL_REFUND'
 
-    def get_id(self) -> str:
+    def get_id(self):
         """
         Get transaction ID
 
@@ -247,7 +247,7 @@ class Response(ResponseBase):
         """
         return self.stats_details.extra3
 
-    def approve(self) -> bool:
+    def approve(self):
         """
         Approve transaction that needs verification
 
@@ -264,7 +264,7 @@ class Response(ResponseBase):
         client.perform_request(request)
         return request.response.result
 
-    def decline(self) -> bool:
+    def decline(self):
         """
         Decline transaction that needs verification
 
@@ -281,7 +281,7 @@ class Response(ResponseBase):
         client.perform_request(request)
         return request.response.result
 
-    def void(self) -> bool:
+    def void(self):
         """
         Void authorized transaction
 
@@ -299,7 +299,7 @@ class Response(ResponseBase):
         client.perform_request(request)
         return request.response.result
 
-    def capture(self) -> bool:
+    def capture(self):
         """
         Capture authorized transaction
 
@@ -347,10 +347,10 @@ class Request(RequestBase):
     :param str transaction_id: transaction ID
     :param str entrance_code: entrance code
     """
-    def __init__(self, transaction_id: str=None, entrance_code: str=None):
+    def __init__(self, transaction_id=None, entrance_code=None):
         self.transaction_id = transaction_id
         self.entrance_code = entrance_code
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -393,7 +393,7 @@ class Request(RequestBase):
         self._response.transaction_id = self.transaction_id
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -403,7 +403,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

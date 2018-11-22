@@ -15,7 +15,7 @@ class Response(ResponseBase):
     :param bool result: validation result. True if request was for a valid PayNL server
     """
     def __init__(self,
-                 result: bool=None,
+                 result=None,
                  *args, **kwargs):
         """
         Initialize the Response object
@@ -31,7 +31,7 @@ class Response(ResponseBase):
         self.result = result
         # The result is a pure boolean, so we'll mimic the base's request object
         kwargs['request'] = Error(result=True)  # Set result to be true to prevent an exception being raised!
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return self.__dict__.__str__()
@@ -59,14 +59,14 @@ class Request(RequestBase):
 
     :param str ip_address: IP address to validate
     """
-    def __init__(self, ip_address: str=None):
+    def __init__(self, ip_address=None):
         """
         Initialize the Request object
         :param ip_address: IP address to validate
         :type ip_address: str
         """
         self.ip_address = ip_address
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return False
@@ -105,7 +105,7 @@ class Request(RequestBase):
         self.handle_schema_errors(errors)
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -115,7 +115,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

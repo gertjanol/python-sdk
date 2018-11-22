@@ -4,8 +4,6 @@ from paynlsdk.api.requestbase import RequestBase
 from paynlsdk.api.responsebase import ResponseBase
 from paynlsdk.objects import Error, BankDetails, BankDetailsSchema
 
-from typing import List
-
 
 class Response(ResponseBase):
     """
@@ -14,13 +12,13 @@ class Response(ResponseBase):
     :param List[BankDetails] banks: list of banks
     """
     def __init__(self,
-                 banks: List[BankDetails]=[],
+                 banks,
                  *args, **kwargs):
         self.banks = banks
         # the result is a list. We'll mimic the request object IF not yet available (should have been done though)
         if 'request' not in kwargs:
             kwargs['request'] = Error(result=True)
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def __repr__(self):
         return self.__dict__.__str__()
@@ -30,8 +28,8 @@ class Request(RequestBase):
     """
     Request object for the Transaction::getbanks API
     """
-    def __init__(self):
-        super().__init__()
+    # def __init__(self):
+    #     super(Request, self).__init__()
 
     def requires_api_token(self):
         return False
@@ -71,7 +69,7 @@ class Request(RequestBase):
         self._response = Response(**kwargs)
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -81,7 +79,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

@@ -15,10 +15,10 @@ class Response(ResponseBase):
     :param PaymentDetails payment_details: payment details
     """
     def __init__(self,
-                 payment_details: TransactionStatusDetails=None,
+                 payment_details=None,
                  *args, **kwargs):
         self.payment_details = payment_details
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
     def get_transaction_id(self):
         """
@@ -135,9 +135,9 @@ class Request(RequestBase):
 
     :param str transaction_id: transaction ID
     """
-    def __init__(self, transaction_id: str=None):
+    def __init__(self, transaction_id=None):
         self.transaction_id = transaction_id
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -177,7 +177,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -187,7 +187,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

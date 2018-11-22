@@ -1,12 +1,10 @@
-from typing import List, Dict
-
 from paynlsdk.api.client import APIClient
 from paynlsdk.objects import ServicePaymentProfile
 
 
 class PaymentMethods(object):
     @staticmethod
-    def get_list(payment_method_id: int=None) -> Dict[int, ServicePaymentProfile]:
+    def get_list(payment_method_id=None):
         """
         Gets the list of payment methods.
 

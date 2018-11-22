@@ -3,7 +3,7 @@ from paynlsdk.api.client import APIClient
 
 class Validate(object):
     @staticmethod
-    def pay_server_ip(ip_address: str):
+    def pay_server_ip(ip_address):
         """
         Validate a Pay server IP
 
@@ -28,7 +28,7 @@ class Validate(object):
         return request
 
     @staticmethod
-    def pay_server_ip_response(ip_address: str):
+    def pay_server_ip_response(ip_address):
         """
         Get a Pay server IP validation :class:`paynlsdk.api.validate.payserverip.Response` instance
 

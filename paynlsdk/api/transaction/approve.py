@@ -16,12 +16,12 @@ class Response(ResponseBase):
     :param str message: message related to the API call
     """
     def __init__(self,
-                 result: bool=None,
-                 message: str=None,
+                 result=None,
+                 message=None,
                  *args, **kwargs):
         self.result = result
         self.message = message
-        super().__init__(**kwargs)
+        super(Response, self).__init__(**kwargs)
 
 
 class ResponseSchema(Schema):
@@ -42,10 +42,10 @@ class Request(RequestBase):
     :param str order_id: transaction ID (wrongly names order_id)
     :param str entrance_code: Entrance code
     """
-    def __init__(self, order_id: str=None, entrance_code: str=None):
+    def __init__(self, order_id=None, entrance_code=None):
         self.order_id = order_id
         self.entrance_code = entrance_code
-        super().__init__()
+        super(Request, self).__init__()
 
     def requires_api_token(self):
         return True
@@ -87,7 +87,7 @@ class Request(RequestBase):
         self._response = response
 
     @property
-    def response(self) -> Response:
+    def response(self):
         """
         Return the API :class:`Response` for the validation request
 
@@ -97,7 +97,7 @@ class Request(RequestBase):
         return self._response
 
     @response.setter
-    def response(self, response: Response):
+    def response(self, response):
         # print('{}::respone.setter'.format(self.__module__ + '.' + self.__class__.__qualname__))
         self._response = response
 

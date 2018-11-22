@@ -3,7 +3,7 @@ from paynlsdk.api.client import APIClient
 
 class Refund(object):
     @staticmethod
-    def info(refund_id: str):
+    def info(refund_id):
         """
         Return refund info
 
@@ -19,13 +19,13 @@ class Refund(object):
         return request.response
 
     @staticmethod
-    def transaction(transaction_id: str,
-                    amount: int=None,
-                    description: str=None,
-                    process_date: str=None,
-                    products: dict={},
-                    vat_percentage: float=None,
-                    exchange_url: str=None):
+    def transaction(transaction_id,
+                    amount=None,
+                    description=None,
+                    process_date=None,
+                    products={},
+                    vat_percentage=None,
+                    exchange_url=None):
         """
         Refund a transaction
 
